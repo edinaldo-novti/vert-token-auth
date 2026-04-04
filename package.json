@@ -1,0 +1,78 @@
+{
+  "name": "@vert/token-auth",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "JWT token-based authentication for Bun APIs: multi-client sessions, refresh rotation, replay detection, and full auth handlers.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./jwt": {
+      "import": "./dist/jwt/index.js",
+      "types": "./dist/jwt/index.d.ts"
+    },
+    "./sessions": {
+      "import": "./dist/sessions/index.js",
+      "types": "./dist/sessions/index.d.ts"
+    },
+    "./handlers": {
+      "import": "./dist/handlers/index.js",
+      "types": "./dist/handlers/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bun build ./src/index.ts --outdir ./dist --target bun && bun run build:types",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "test": "bun test",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "bun run clean && bun run build && bun run test"
+  },
+  "keywords": [
+    "bun",
+    "vert",
+    "jwt",
+    "token-auth",
+    "api-auth",
+    "refresh-token",
+    "multi-client",
+    "sessions"
+  ],
+  "author": "Vert Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edinaldo-at/vert-token-auth.git"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "dependencies": {
+    "@vert/core": "^0.1.0",
+    "@vert/auth": "^0.1.0",
+    "jose": "^5.6.0",
+    "zod": "^3.23.0"
+  },
+  "peerDependencies": {
+    "drizzle-orm": ">=0.30.0"
+  },
+  "peerDependenciesMeta": {
+    "drizzle-orm": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.5.0",
+    "drizzle-orm": ">=0.30.0"
+  }
+}
